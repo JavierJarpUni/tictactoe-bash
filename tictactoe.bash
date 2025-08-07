@@ -83,10 +83,11 @@ agregar_reporte() {
     echo "$mensaje" >> "$REPORTE"
 }
 
+#==============================Javier Jarp 23-0466===============================
 clear_screen() {
     clear
 }
-
+#==============================Javier Jarp 23-0466===============================
 print_header() {
     clear_screen
     echo "=================================="
@@ -94,7 +95,7 @@ print_header() {
     echo "=================================="
     echo
 }
-
+#==============================Javier Jarp 23-0466===============================
 draw_board() {
     echo "     |     |     "
     echo "  ${board[0]}  |  ${board[1]}  |  ${board[2]}  "
@@ -107,7 +108,7 @@ draw_board() {
     echo "     |     |     "
     echo
 }
-
+#==============================Javier Jarp 23-0466===============================
 draw_reference_board() {
     echo "Position numbers:"
     echo "     |     |     "
@@ -121,7 +122,7 @@ draw_reference_board() {
     echo "     |     |     "
     echo
 }
-
+#==============================Javier Jarp 23-0466===============================
 show_current_player() {
     if [[ $current_player == "X" ]]; then
         echo "$player1_name's turn (X)"
@@ -130,7 +131,7 @@ show_current_player() {
     fi
     echo
 }
-
+#==============================Javier Jarp 23-0466===============================
 check_winner() {
     # Check rows
     for i in 0 3 6; do
@@ -157,7 +158,7 @@ check_winner() {
     
     return 1
 }
-
+#==============================Javier Jarp 23-0466===============================
 check_draw() {
     for cell in "${board[@]}"; do
         if [[ $cell == " " ]]; then
