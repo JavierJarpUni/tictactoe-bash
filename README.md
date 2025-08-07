@@ -150,7 +150,9 @@ Sistema finalizado por el usuario ----
 - 🔄 *Pendiente de contribución*
 
 ### Jean Roque (23-0812)
-- 🔄 *Pendiente de contribución*
+- ✅ Funcionalidad de preguntar el movimiento del jugador
+- ✅ Mecanismo de cambio del jugador actual
+- ✅ Función de reseteo del juego
 
 ## 📋 Requerimientos del Proyecto Final
 
@@ -173,18 +175,9 @@ Sistema finalizado por el usuario ----
 El proyecto está listo para que los otros integrantes agreguen sus contribuciones:
 
 1. **Alejandro Gómez (23-0573)**: Puede agregar funcionalidades como estadísticas avanzadas, menú de opciones, etc.
-2. **Jean Roque (23-0812)**: Puede agregar funcionalidades como backup automático, limpieza de archivos, etc.
 
 Cada contribución debe estar marcada con el comentario:
 ```bash
 #=====================================NOMBRE ESTUDIANTE MATRICULA==============================
 ```
 
-## 📞 Contacto
-
-Para preguntas sobre el proyecto, contactar a cualquier integrante del grupo.
-
----
-
-**Fecha de última actualización**: $(date +%F)
-**Versión del proyecto**: 1.0.0
