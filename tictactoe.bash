@@ -3,6 +3,25 @@
 # SIMPLE TIC-TAC-TOE GAME
 # Two-player only
 
+#=====================================Emil Moquete 22-0969==============================
+# SISTEMA DE GESTIÓN DE JUEGOS TIC-TAC-TOE CON LOGS Y REPORTES
+# Descripción: Este script implementa un sistema completo de gestión de juegos
+# TicTacToe que incluye logging, generación de reportes, estadísticas de juego,
+# y automatización de tareas relacionadas con el seguimiento de partidas.
+#=====================================Emil Moquete 22-0969==============================
+
+# Variables globales del sistema
+GRUPO="ALEJANDRO GÓMEZ (23-0573), EMIL MOQUETE (22-0969), JAVIER JARP (23-0466), JEAN ROQUE (23-0812)"
+DESCRIPCION="Sistema de gestión de juegos TicTacToe con logs y reportes"
+DIRECTORIO_ACTUAL=$(pwd)
+FECHA_EJECUCION=$(date +%F)
+HORA_EJECUCION=$(date +%H:%M:%S)
+
+# Configuración de archivos de reporte y logs
+BACKUP_DIR="./backups"
+REPORTE="$BACKUP_DIR/TicTacToe_Reporte_$(date +%F).txt"
+LOG_FILE="$BACKUP_DIR/TicTacToe_Logs_$(date +%F).log"
+
 #==============================Javier Jarp 23-0466===============================
 # Game board (1-9 positions)
 declare -a board=(" " " " " " " " " " " " " " " " " ")
@@ -11,6 +30,58 @@ declare -a board=(" " " " " " " " " " " " " " " " " ")
 current_player="X"
 player1_name="Player 1"
 player2_name="Player 2"
+
+#=====================================Emil Moquete 22-0969==============================
+# Función para mostrar información inicial del proyecto
+mostrar_informacion_inicial() {
+    clear
+    echo "================================================================"
+    echo "                    PROYECTO FINAL SHELL SCRIPTING"
+    echo "================================================================"
+    echo "Grupo: $GRUPO"
+    echo "Descripción: $DESCRIPCION"
+    echo "Directorio de ejecución: $DIRECTORIO_ACTUAL"
+    echo "Fecha de ejecución: $FECHA_EJECUCION"
+    echo "Hora de ejecución: $HORA_EJECUCION"
+    echo "================================================================"
+    echo
+    
+    # Crear directorio de backups si no existe
+    if [[ ! -d "$BACKUP_DIR" ]]; then
+        mkdir -p "$BACKUP_DIR"
+    fi
+    
+    # Inicializar archivo de reporte
+    echo "=== REPORTE DE EJECUCIÓN - GRUPO ===" > "$REPORTE"
+    echo "Fecha: $FECHA_EJECUCION" >> "$REPORTE"
+    echo "Hora: $HORA_EJECUCION" >> "$REPORTE"
+    echo "Directorio: $DIRECTORIO_ACTUAL" >> "$REPORTE"
+    echo "Grupo: $GRUPO" >> "$REPORTE"
+    echo "=========================================" >> "$REPORTE"
+    echo "" >> "$REPORTE"
+    
+    # Inicializar archivo de logs
+    echo "[$HORA_EJECUCION] Iniciando sistema de gestión de juegos" > "$LOG_FILE"
+    echo "[$HORA_EJECUCION] Grupo: $GRUPO" >> "$LOG_FILE"
+    echo "[$HORA_EJECUCION] Directorio: $DIRECTORIO_ACTUAL" >> "$LOG_FILE"
+    
+    echo "Creando directorio de backups ----" >> "$REPORTE"
+    echo "Inicializando sistema de reportes ----" >> "$REPORTE"
+    echo "Sistema inicializado correctamente ----" >> "$REPORTE"
+}
+
+# Función para logging de eventos
+log_event() {
+    local mensaje="$1"
+    local timestamp=$(date +%H:%M:%S)
+    echo "[$timestamp] $mensaje" >> "$LOG_FILE"
+}
+
+# Función para agregar al reporte
+agregar_reporte() {
+    local mensaje="$1"
+    echo "$mensaje" >> "$REPORTE"
+}
 
 clear_screen() {
     clear
@@ -86,7 +157,7 @@ check_winner() {
     
     return 1
 }
-#=====================================Javier Jarp 23-0466==============================
+
 check_draw() {
     for cell in "${board[@]}"; do
         if [[ $cell == " " ]]; then
@@ -96,22 +167,27 @@ check_draw() {
     return 0
 }
 
+#=====================================Emil Moquete 22-0969==============================
+# Función para realizar movimiento con logging
 make_move() {
     local position=$1
     local index=$((position - 1))
     
     # Check if position is valid
     if [[ $position -lt 1 || $position -gt 9 ]]; then
+        log_event "Movimiento inválido: posición $position fuera de rango"
         return 1
     fi
     
     # Check if position is empty
     if [[ ${board[$index]} != " " ]]; then
+        log_event "Movimiento inválido: posición $position ya ocupada"
         return 1
     fi
     
     # Make the move
     board[$index]=$current_player
+    log_event "Jugador $current_player movió a posición $position"
     return 0
 }
 
@@ -130,6 +206,7 @@ get_player_move() {
                 ;;
             *)
                 echo "Invalid input! Enter a number 1-9."
+                log_event "Entrada inválida del usuario: $input"
                 ;;
         esac
     done
@@ -141,13 +218,17 @@ switch_player() {
     else
         current_player="X"
     fi
+    log_event "Cambio de turno a jugador $current_player"
 }
 
 reset_game() {
     board=(" " " " " " " " " " " " " " " " " ")
     current_player="X"
+    log_event "Juego reiniciado"
 }
 
+#=====================================Emil Moquete 22-0969==============================
+# Función para configurar jugadores con logging
 setup_players() {
     echo -n "Enter Player 1 name (X): "
     read player1_name
@@ -165,6 +246,9 @@ setup_players() {
     echo "Game setup: $player1_name (X) vs $player2_name (O)"
     echo "Press ENTER to start..."
     read
+    
+    log_event "Configuración de jugadores: $player1_name vs $player2_name"
+    agregar_reporte "Configurando jugadores del juego ----"
 }
 
 play_game() {
@@ -186,8 +270,12 @@ play_game() {
             
             if [[ $current_player == "X" ]]; then
                 echo "🎉 $player1_name wins! 🎉"
+                log_event "Victoria de $player1_name (X)"
+                agregar_reporte "Juego terminado - Victoria de $player1_name ----"
             else
                 echo "🎉 $player2_name wins! 🎉"
+                log_event "Victoria de $player2_name (O)"
+                agregar_reporte "Juego terminado - Victoria de $player2_name ----"
             fi
             break
             
@@ -195,6 +283,8 @@ play_game() {
             print_header
             draw_board
             echo "🤝 It's a draw! Good game!"
+            log_event "Juego empatado"
+            agregar_reporte "Juego terminado - Empate ----"
             break
         else
             switch_player
@@ -209,27 +299,43 @@ ask_play_again() {
     
     case $answer in
         "y"|"Y"|"yes"|"Yes")
+            log_event "Usuario eligió jugar otra partida"
             return 0
             ;;
         *)
+            log_event "Usuario eligió terminar el juego"
             return 1
             ;;
     esac
 }
 
-# Main game loop
-print_header
-echo "Welcome to Tic-Tac-Toe!"
-echo
-
-setup_players
-
-while true; do
-    reset_game
-    play_game
+#=====================================Emil Moquete 22-0969==============================
+# Función principal del programa
+main() {
+    mostrar_informacion_inicial
     
-    if ! ask_play_again; then
-        echo "Thanks for playing!"
-        break
-    fi
-done
+    echo ""
+    echo "Presiona ENTER para continuar al juego..."
+    read
+    
+    print_header
+    echo "Welcome to Tic-Tac-Toe!"
+    echo
+    
+    setup_players
+    
+    while true; do
+        reset_game
+        play_game
+        
+        if ! ask_play_again; then
+            echo "Thanks for playing!"
+            agregar_reporte "Sistema finalizado por el usuario ----"
+            log_event "Sistema finalizado por el usuario"
+            break
+        fi
+    done
+}
+
+# Ejecutar programa principal
+main
