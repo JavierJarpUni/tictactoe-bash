@@ -192,6 +192,7 @@ make_move() {
     return 0
 }
 
+#==============================Jean Roque 23-0812===============================
 get_player_move() {
     while true; do
         echo -n "Enter position (1-9): "
@@ -213,6 +214,7 @@ get_player_move() {
     done
 }
 
+#==============================Jean Roque 23-0812===============================
 switch_player() {
     if [[ $current_player == "X" ]]; then
         current_player="O"
@@ -222,6 +224,7 @@ switch_player() {
     log_event "Cambio de turno a jugador $current_player"
 }
 
+#==============================Jean Roque 23-0812===============================
 reset_game() {
     board=(" " " " " " " " " " " " " " " " " ")
     current_player="X"
