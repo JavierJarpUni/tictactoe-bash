@@ -9,12 +9,13 @@ Este proyecto implementa un **sistema completo de gestión de juegos TicTacToe**
 - ✅ **Información inicial del grupo**
 - ✅ **Generación automática de reportes**
 - ✅ **Logging de eventos del sistema**
-
+- ✅ **Menu Principal** (contribución de Alejandro Gómez)
+- 
 ## 👥 Integrantes del Grupo
 
 | Estudiante | Matrícula | Contribución |
 |------------|-----------|--------------|
-| **Alejandro Gómez** | 23-0573 | *Pendiente* |
+| **Alejandro Gómez** | 23-0573 | Menu Principal |
 | **Emil Moquete** | 22-0969 | Sistema de logs y reportes |
 | **Javier Jarp** | 23-0466 | Juego TicTacToe base |
 | **Jean Roque** | 23-0812 | Funciones de los jugadores |
@@ -147,7 +148,7 @@ Sistema finalizado por el usuario ----
 - ✅ Sistema de turnos
 
 ### Alejandro Gómez (23-0573)
-- 🔄 *Pendiente de contribución*
+- ✅ Menu Principal
 
 ### Jean Roque (23-0812)
 - ✅ Funcionalidad de preguntar el movimiento del jugador
@@ -172,9 +173,7 @@ Sistema finalizado por el usuario ----
 
 ## 🎯 Próximos Pasos
 
-El proyecto está listo para que los otros integrantes agreguen sus contribuciones:
-
-1. **Alejandro Gómez (23-0573)**: Puede agregar funcionalidades como estadísticas avanzadas, menú de opciones, etc.
+El proyecto está listo.
 
 Las contribuciones correspondientes de cada estudiante está marcada dentro del código con el comentario:
 ```bash
